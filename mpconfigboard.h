@@ -17,56 +17,55 @@
 #define MICROPY_HW_ENABLE_CAN       (1)
 
 // HSE is 25MHz
-#define MICROPY_HW_CLK_PLLM (25)
-#define MICROPY_HW_CLK_PLLN (336)
-#define MICROPY_HW_CLK_PLLP (RCC_PLLP_DIV2)
-#define MICROPY_HW_CLK_PLLQ (7)
+#define MICROPY_HW_CLK_PLLM (25) // divide external clock by this to get 1MHz
+#define MICROPY_HW_CLK_PLLN (336) // PLL clock in MHz
+#define MICROPY_HW_CLK_PLLP (RCC_PLLP_DIV2) // divide PLL clock by this to get core clock
+#define MICROPY_HW_CLK_PLLQ (7) // divide core clock by this to get 48MHz
 
-// UART config
-#if 0
-// A9 is used for USB VBUS detect, and A10 is used for USB_FS_ID.
-// UART1 is also on PB6/7 but PB6 is tied to the Audio SCL line.
-// Without board modifications, this makes UART1 unusable on this board.
+// USART1
 #define MICROPY_HW_UART1_TX     (pin_A9)   // PA9,PB6
 #define MICROPY_HW_UART1_RX     (pin_A10)  // PA10,PB7
-#endif
 
+// USART2
 #define MICROPY_HW_UART2_TX     (pin_A2)  // PA2,PD5
 #define MICROPY_HW_UART2_RX     (pin_A3)  // PA3,PD6
 #define MICROPY_HW_UART2_RTS    (pin_A1)  // PA1,PD4
 #define MICROPY_HW_UART2_CTS    (pin_A0)  // PA0,PD3
 
+// USART3
 #define MICROPY_HW_UART3_TX     (pin_D8)  // PB10,PC10,PD8
 #define MICROPY_HW_UART3_RX     (pin_D9)  // PB11,PC11,PD9
 #define MICROPY_HW_UART3_RTS    (pin_D12) // PB14,PD12
 #define MICROPY_HW_UART3_CTS    (pin_D11) // PB13,PD11
 
+// UART4
 #define MICROPY_HW_UART4_TX     (pin_A0)  // PA0,PC10
 #define MICROPY_HW_UART4_RX     (pin_A1)  // PA1,PC11
 
-//#define MICROPY_HW_UART5_TX     (pin_C12) // PC12
-//#define MICROPY_HW_UART5_TX     (pin_D2)  // PD2
+// UART5
+#define MICROPY_HW_UART5_TX     (pin_C12) // PC12
+#define MICROPY_HW_UART5_RX     (pin_D2)  // PD2
 
-// NOTE: PC7 is connected to MCLK on the Audio chip. This is an input signal
-//       so I think as long as you're not using the audio chip then it should
-//       be fine to use as a UART pin.
+// USART6
 #define MICROPY_HW_UART6_TX     (pin_C6) // PC6,PG14
 #define MICROPY_HW_UART6_RX     (pin_C7) // PC7,PG9
 
-//#define MICROPY_HW_UART7_TX     (pin_E8) // PE8,PF7
-//#define MICROPY_HW_UART7_RX     (pin_E7) // PE7,PF6
+// UART7
+// #define MICROPY_HW_UART7_TX     (pin_E8) // PE8,PF7
+// #define MICROPY_HW_UART7_RX     (pin_E7) // PE7,PF6
 
-//#define MICROPY_HW_UART8_TX     (pin_E1) // PE1
-//#define MICROPY_HW_UART8_RX     (pin_E0) // PE0
+// UART8
+// #define MICROPY_HW_UART8_TX     (pin_E1) // PE1
+// #define MICROPY_HW_UART8_RX     (pin_E0) // PE0
 
 // I2C busses
 #define MICROPY_HW_I2C1_SCL (pin_B6)  // PB8,PB6
 #define MICROPY_HW_I2C1_SDA (pin_B7)  // PB9,PB7
 #define MICROPY_HW_I2C2_SCL (pin_B10) // PB10
 #define MICROPY_HW_I2C2_SDA (pin_B11) // PB11
-//#define MICROPY_HW_I2C3_SCL (pin_A8) // not sure?
-//#define MICROPY_HW_I2C3_SDA (pin_C9) // not sure?
-// EEPROM on I2C1 PB6/7
+#define MICROPY_HW_I2C3_SCL (pin_A8)  // PA8
+#define MICROPY_HW_I2C3_SDA (pin_C9)  // PC9
+// AT24C08 EEPROM on I2C1 0x50-0x53
 
 // I2S busses
 // I2S2_CK  PB13
@@ -123,5 +122,5 @@
 // 10 SW1 - PA8
 
 // USB config
-#define MICROPY_HW_USB_VBUS_DETECT_PIN (pin_A9)
-#define MICROPY_HW_USB_OTG_ID_PIN      (pin_A10)
+// #define MICROPY_HW_USB_VBUS_DETECT_PIN (pin_A9)
+// #define MICROPY_HW_USB_OTG_ID_PIN      (pin_A10)
