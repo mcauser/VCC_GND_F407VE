@@ -173,6 +173,21 @@ Toggle blue led
 >>> adc.read()
 ```
 
+### Flashing via DFU
+
+This board can also be flashed using DFU. To put the board in DFU mode, slide
+the BOOT0 DIP switch (number 2) to the ON position and press RESET.
+
+Now you can flash the board using USB with the command
+`make BOARD=VCC_GND_F407 deploy`. Once the board is flashed, slide BOOT0 back
+to the original position.
+
+You can use the Micropyton command `pyb.bootloader()` to get into DFU mode
+without needing to use the switch.
+
+Currently, you need to unplug and replug the board in order to switch from DFU
+mode to regular mode.
+
 ### Specifications:
 
 * STM32f407VET6 ARM Cortex M4
