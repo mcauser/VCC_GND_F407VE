@@ -2,7 +2,7 @@
 
 MicroPython board definition files for the STM32F407VET6 Mini board from [VCC-GND](http://vcc-gnd.taobao.com).
 
-![board](http://i.imgur.com/ruEhY81.jpg)
+![board](docs/STM32F407VET6.jpg)
 
 You can buy one for around $12 USD on [AliExpress](https://www.aliexpress.com/item/STM32F407VET6-Mini-version-of-the-core-board-STM32-minimum-system-version/32709285751.html)
 
