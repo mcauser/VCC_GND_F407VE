@@ -215,8 +215,15 @@ mode to regular mode.
 * 2x DIP switch for bootloader selection
 * Reset button
 * 2x18 side pins + 2x10 top pins + 1x4 debug pins
+* Dimensions: 49.53mm x 39.37mm
 
 ### Modifications:
 
 * change HSE_VALUE from 8000000 to 25000000
 * change PLL_M from 8 to 25
+
+### Links:
+
+* [STM32F407VE on st.com](http://www.st.com/content/st_com/en/products/microcontrollers/stm32-32-bit-arm-cortex-mcus/stm32-high-performance-mcus/stm32f4-series/stm32f407-417/stm32f407ve.html)
+* [Buy on AliExpress](https://www.aliexpress.com/item/New-STM32F407VET6-Mini-version-of-the-core-board-STM32-minimum-system-board/32809309613.html) or search for "STM32F407VET6 Mini"
+* [Buy on Taobao](https://world.taobao.com/item/523361737493.htm)
