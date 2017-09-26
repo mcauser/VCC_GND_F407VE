@@ -6,17 +6,17 @@ MicroPython board definition files for the STM32F407VET6 Mini board from [VCC-GN
 
 You can buy one for around $12 USD on [AliExpress](https://www.aliexpress.com/item/STM32F407VET6-Mini-version-of-the-core-board-STM32-minimum-system-version/32709285751.html)
 
-Clone the board definitions to your [MicroPython](https://github.com/micropython/micropython) stmhal/boards folder.
+Clone the board definitions to your [MicroPython](https://github.com/micropython/micropython) ports/stm32/boards folder.
 
 ```
-cd micropython/stmhal/boards
+cd micropython/ports/stm32/boards
 git clone https://github.com/mcauser/VCC_GND_F407.git
 ```
 
 ### Build the firmware:
 
 ```
-cd micropython/stmhal
+cd micropython/ports/stm32
 make BOARD=VCC_GND_F407
 ```
 
@@ -62,7 +62,7 @@ It should say "Listening at *:4242..."
 Open the second terminal and run:
 
 ```
-cd micropython/stmhal
+cd micropython/ports/stm32
 make BOARD=VCC_GND_F407
 arm-none-eabi-gdb build-VCC_GND_F407/firmware.elf
 ```
