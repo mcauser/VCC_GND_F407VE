@@ -227,3 +227,5 @@ mode to regular mode.
 * [STM32F407VE on st.com](http://www.st.com/content/st_com/en/products/microcontrollers/stm32-32-bit-arm-cortex-mcus/stm32-high-performance-mcus/stm32f4-series/stm32f407-417/stm32f407ve.html)
 * [Buy on AliExpress](https://www.aliexpress.com/item/New-STM32F407VET6-Mini-version-of-the-core-board-STM32-minimum-system-board/32809309613.html) or search for "STM32F407VET6 Mini"
 * [Buy on Taobao](https://world.taobao.com/item/523361737493.htm)
+* [STM32F407VET6 datasheet](https://github.com/mcauser/VCC_GND_F407/blob/master/docs/STM32F407VET6_datasheet.pdf)
+* [STM32F407VET6 schematics](https://github.com/mcauser/VCC_GND_F407/blob/master/docs/STM32F407VET6_schematics.pdf)
