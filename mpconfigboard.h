@@ -22,6 +22,11 @@
 #define MICROPY_HW_CLK_PLLP (RCC_PLLP_DIV2) // divide PLL clock by this to get core clock
 #define MICROPY_HW_CLK_PLLQ (7) // divide core clock by this to get 48MHz
 
+// The board has a 32kHz crystal for the RTC
+#define MICROPY_HW_RTC_USE_LSE      (1)
+#define MICROPY_HW_RTC_USE_US       (0)
+// #define MICROPY_HW_RTC_USE_CALOUT   (1)  // turn on/off PC13 512Hz output
+
 // USART1
 #define MICROPY_HW_UART1_TX     (pin_A9)   // PA9,PB6
 #define MICROPY_HW_UART1_RX     (pin_A10)  // PA10,PB7
