@@ -182,7 +182,7 @@ Now you can flash the board using USB with the command
 `make BOARD=VCC_GND_F407 deploy`. Once the board is flashed, slide BOOT0 back
 to the original position.
 
-You can use the Micropyton command `pyb.bootloader()` to get into DFU mode
+You can use the MicroPython command `pyb.bootloader()` to get into DFU mode
 without needing to use the switch.
 
 Currently, you need to unplug and replug the board in order to switch from DFU
