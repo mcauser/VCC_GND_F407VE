@@ -6,7 +6,7 @@ MicroPython board definition files for the STM32F407VET6 Mini board from [VCC-GN
 
 You can buy one for around $12 USD on [AliExpress](https://www.aliexpress.com/item/STM32F407VET6-Mini-version-of-the-core-board-STM32-minimum-system-version/32709285751.html)
 
-Clone the board definitions to your [MicroPython](https://github.com/micropython/micropython) ports/stm32/boards folder.
+Clone the board definitions to your [MicroPython](https://github.com/micropython/micropython) `ports/stm32/boards` folder.
 
 ```
 cd micropython/ports/stm32/boards
@@ -169,18 +169,20 @@ Toggle blue led
 >>> rtc.datetime()
 (2017, 1, 13, 6, 5, 0, 1, 204)
 
->>> adc = pyb.ADC(pyb.Pin.board.PA1)
+>>> adc = pyb.ADC(pyb.Pin.board.PA1) # does not work
+>>> adc = pyb.ADC(pyb.Pin.board.P1_23)
 >>> adc.read()
 ```
 
 ### Flashing via DFU
 
-This board can also be flashed using DFU. To put the board in DFU mode, slide
-the BOOT0 DIP switch (number 2) to the ON position and press RESET.
+This board can also be flashed using DFU. To put the board in DFU mode,
+disconnect USB, slide the BOOT0 DIP switch (number 2) to the ON position
+(towards USB) and reconnect USB.
 
 Now you can flash the board using USB with the command
 `make BOARD=VCC_GND_F407 deploy`. Once the board is flashed, slide BOOT0 back
-to the original position.
+to the original position, disconnect and reconnect USB.
 
 You can use the MicroPython command `pyb.bootloader()` to get into DFU mode
 without needing to use the switch.
@@ -229,3 +231,7 @@ mode to regular mode.
 * [Buy on Taobao](https://world.taobao.com/item/523361737493.htm)
 * [STM32F407VET6 datasheet](https://github.com/mcauser/VCC_GND_F407/blob/master/docs/STM32F407VET6_datasheet.pdf)
 * [STM32F407VET6 schematics](https://github.com/mcauser/VCC_GND_F407/blob/master/docs/STM32F407VET6_schematics.pdf)
+
+## License
+
+Licensed under the [MIT License](http://opensource.org/licenses/MIT).
