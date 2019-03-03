@@ -1,7 +1,7 @@
-#define VCC_GND_F407
+#define VCC_GND_F407VE
 
-#define MICROPY_HW_BOARD_NAME       "VCC-GND STM32F407"
-#define MICROPY_HW_MCU_NAME         "STM32F407"
+#define MICROPY_HW_BOARD_NAME       "VCC-GND STM32F407VE"
+#define MICROPY_HW_MCU_NAME         "STM32F407VE"
 
 #define MICROPY_HW_HAS_FLASH        (1)
 #define MICROPY_HW_HAS_SDCARD       (1)
@@ -9,6 +9,9 @@
 #define MICROPY_HW_ENABLE_RTC       (1)
 #define MICROPY_HW_ENABLE_DAC       (1)
 #define MICROPY_HW_ENABLE_USB       (1)
+
+//#define MICROPY_HW_FLASH_FS_LABEL   "STM32F407VE"
+// https://github.com/micropython/micropython/commit/3d5d76fb7384cd6c0bcd62f6a6799261b73f786d#diff-4a448575fb7cfab8e70659b57c9cb4cc
 
 // HSE is 25MHz
 #define MICROPY_HW_CLK_PLLM (25) // divide external clock by this to get 1MHz
@@ -49,14 +52,6 @@
 #define MICROPY_HW_UART6_TX     (pin_C6) // PC6,PG14
 #define MICROPY_HW_UART6_RX     (pin_C7) // PC7,PG9
 
-// UART7
-// #define MICROPY_HW_UART7_TX     (pin_E8) // PE8,PF7
-// #define MICROPY_HW_UART7_RX     (pin_E7) // PE7,PF6
-
-// UART8
-// #define MICROPY_HW_UART8_TX     (pin_E1) // PE1
-// #define MICROPY_HW_UART8_RX     (pin_E0) // PE0
-
 // I2C busses
 #define MICROPY_HW_I2C1_SCL (pin_B6)  // PB8,PB6
 #define MICROPY_HW_I2C1_SDA (pin_B7)  // PB9,PB7
@@ -93,10 +88,10 @@
 #define MICROPY_HW_SPI3_MOSI (pin_B5)  // PB5
 
 // CAN busses
-#define MICROPY_HW_CAN1_TX (pin_B9) // PB9,PD1,PA12
-#define MICROPY_HW_CAN1_RX (pin_B8) // PB8,PD0,PA11
-#define MICROPY_HW_CAN2_TX (pin_B13)
-#define MICROPY_HW_CAN2_RX (pin_B12)
+#define MICROPY_HW_CAN1_TX (pin_B9)  // PB9,PD1,PA12
+#define MICROPY_HW_CAN1_RX (pin_B8)  // PB8,PD0,PA11
+#define MICROPY_HW_CAN2_TX (pin_B13) // PB13
+#define MICROPY_HW_CAN2_RX (pin_B12) // PB12
 
 // DAC
 // DAC_OUT1 PA4

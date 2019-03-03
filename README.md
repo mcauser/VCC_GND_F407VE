@@ -10,14 +10,14 @@ Clone the board definitions to your [MicroPython](https://github.com/micropython
 
 ```
 cd micropython/ports/stm32/boards
-git clone https://github.com/mcauser/VCC_GND_F407.git
+git clone https://github.com/mcauser/VCC_GND_F407VE.git
 ```
 
 ### Build the firmware:
 
 ```
 cd micropython/ports/stm32
-make BOARD=VCC_GND_F407
+make BOARD=VCC_GND_F407VE
 ```
 
 ### Instructions for Mac OSX
@@ -63,8 +63,8 @@ Open the second terminal and run:
 
 ```
 cd micropython/ports/stm32
-make BOARD=VCC_GND_F407
-arm-none-eabi-gdb build-VCC_GND_F407/firmware.elf
+make BOARD=VCC_GND_F407VE
+arm-none-eabi-gdb build-VCC_GND_F407VE/firmware.elf
 ```
 
 Inside gdb run:
@@ -106,7 +106,7 @@ Be sure to eject the PYBFLASH mount before unplugging the board.
 Success!
 
 ```
-MicroPython v1.8.7-4-g51a4473-dirty on 2017-01-13; VCC-GND STM32F407 with STM32F407
+MicroPython v1.8.7-4-g51a4473-dirty on 2017-01-13; VCC-GND STM32F407VE with STM32F407VE
 Type "help()" for more information.
 >>>
 ```
@@ -181,7 +181,7 @@ disconnect USB, slide the BOOT0 DIP switch (number 2) to the ON position
 (towards USB) and reconnect USB.
 
 Now you can flash the board using USB with the command
-`make BOARD=VCC_GND_F407 deploy`. Once the board is flashed, slide BOOT0 back
+`make BOARD=VCC_GND_F407VE deploy`. Once the board is flashed, slide BOOT0 back
 to the original position, disconnect and reconnect USB.
 
 You can use the MicroPython command `pyb.bootloader()` to get into DFU mode
@@ -189,6 +189,14 @@ without needing to use the switch.
 
 Currently, you need to unplug and replug the board in order to switch from DFU
 mode to regular mode.
+
+### Exposed Port Pins
+
+* PA0-PA15
+* PB0-PB15
+* PC0-PC15
+* PD0-PD15
+* PE0-PE15
 
 ### Specifications:
 
@@ -226,11 +234,14 @@ mode to regular mode.
 
 ### Links:
 
-* [STM32F407VE on st.com](http://www.st.com/content/st_com/en/products/microcontrollers/stm32-32-bit-arm-cortex-mcus/stm32-high-performance-mcus/stm32f4-series/stm32f407-417/stm32f407ve.html)
+* [STM32F407VE on st.com](https://www.st.com/en/microcontrollers-microprocessors/stm32f407ve.html)
 * [Buy on AliExpress](https://www.aliexpress.com/item/New-STM32F407VET6-Mini-version-of-the-core-board-STM32-minimum-system-board/32809309613.html) or search for "STM32F407VET6 Mini"
 * [Buy on Taobao](https://world.taobao.com/item/523361737493.htm)
-* [STM32F407VET6 datasheet](https://github.com/mcauser/VCC_GND_F407/blob/master/docs/STM32F407VET6_datasheet.pdf)
-* [STM32F407VET6 schematics](https://github.com/mcauser/VCC_GND_F407/blob/master/docs/STM32F407VET6_schematics.pdf)
+* [STM32F407 datasheet](docs/STM32F407_datasheet.pdf)
+* [STM32F407VET6 mini schematics](docs/STM32F407VET6_schematics.pdf)
+* [STM32F407VET6 mini PCB](docs/STM32F407VET6_mini.pdf)
+* [STM32F4 alternate function mapping](docs/STM32F4-AF-mapping.pdf)
+* [Larger STM32F407ZGT6 mini board](https://github.com/mcauser/VCC_GND_F407ZG)
 
 ## License
 
