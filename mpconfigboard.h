@@ -4,11 +4,11 @@
 #define MICROPY_HW_MCU_NAME         "STM32F407VE"
 
 #define MICROPY_HW_HAS_FLASH        (1)
-#define MICROPY_HW_HAS_SDCARD       (1)
 #define MICROPY_HW_ENABLE_RNG       (1)
 #define MICROPY_HW_ENABLE_RTC       (1)
 #define MICROPY_HW_ENABLE_DAC       (1)
 #define MICROPY_HW_ENABLE_USB       (1)
+#define MICROPY_HW_ENABLE_SDCARD    (1)
 
 //#define MICROPY_HW_FLASH_FS_LABEL   "STM32F407VE"
 // https://github.com/micropython/micropython/commit/3d5d76fb7384cd6c0bcd62f6a6799261b73f786d#diff-4a448575fb7cfab8e70659b57c9cb4cc
