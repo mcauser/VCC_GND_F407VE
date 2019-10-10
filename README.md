@@ -4,201 +4,51 @@ MicroPython board definition files for the STM32F407VET6 Mini board from [VCC-GN
 
 ![board](docs/STM32F407VET6.jpg)
 
-You can buy one for around $12 USD on [AliExpress](https://www.aliexpress.com/item/STM32F407VET6-Mini-version-of-the-core-board-STM32-minimum-system-version/32709285751.html)
+You can buy one for around $15 AUD (Oct 2019) on [AliExpress].
+
+### Build the firmware
 
 Clone the board definitions to your [MicroPython](https://github.com/micropython/micropython) `ports/stm32/boards` folder.
 
-```
+```bash
 cd micropython/ports/stm32/boards
 git clone https://github.com/mcauser/VCC_GND_F407VE.git
-```
 
-### Build the firmware:
-
-```
-cd micropython/ports/stm32
+cd ..
 make BOARD=VCC_GND_F407VE
-```
-
-### Instructions for Mac OSX
-
-To upload, I used a $2 USD [ST-Link V2 clone](https://www.aliexpress.com/item/FREE-SHIPPING-ST-Link-V2-stlink-mini-STM8STM32-STLINK-simulator-download-programming-With-Cover/32242036342.html) with `arm-none-eabi-gdb`
-
-Install packages
-
-```
-brew install stlink
-brew cask install gcc-arm-embedded
-```
-
-Check if ST-LINK V2 device is found.
-(plug it into a free USB port)
-
-```
-st-info --probe
-Found 1 stlink programmers
-```
-
-Connect ST-LINK V2 to VCC-GND STM32F407VET6 dev board
-
-```
-ST-LINK V2 -- STM32F407VET6
-3.3V -------- 3v3
-SWDIO ------- DIO
-SWCLK ------- SCK
-GND --------- GND
-```
-
-Open two Terminals, one for `st-util` and the other to compile and upload.
-
-Open the first terminal and run
-
-```
-st-util
-```
-
-It should say "Listening at *:4242..."
-
-Open the second terminal and run:
-
-```
-cd micropython/ports/stm32
-make BOARD=VCC_GND_F407VE
-arm-none-eabi-gdb build-VCC_GND_F407VE/firmware.elf
-```
-
-Inside gdb run:
-
-```
-(gdb) target extended localhost:4242
-(gdb) load
-(gdb) exit
-```
-
-LEDs will blink as the firmware is uploaded.
-
-Switch back to the `st-util` Terminal
-
-```
-Look for "Flash written and verified! jolly good!"
-```
-
-Press Ctrl+C to exit
-
-Disconnect ST-LINK from USB
-Disconnect ST-LINK from dev board (3V3,SWDIO,SWCLK,GND)
-
-Run MicroPython on the board
-Connect to the dev board using Micro USB cable (make sure ST-LINK is disconnected to avoid blue smoke!)
-
-```
-screen /dev/tty.usbmodem1412 115200
-or
-screen /dev/tty.usbmodem1422 115200
-```
-
-Not sure which? Use tab completion `screen /dev/tty.usb` Tab Tab.
-
-To exit screen: Ctrl+a Ctrl+\ y
-
-Be sure to eject the PYBFLASH mount before unplugging the board.
-
-Success!
-
-```
-MicroPython v1.8.7-4-g51a4473-dirty on 2017-01-13; VCC-GND STM32F407VE with STM32F407VE
-Type "help()" for more information.
->>>
-```
-
-Your board is now running MicroPython!
-
-```
->>> machine.info()
-ID=30003500:06473332:32333338
-S=168000000
-H=168000000
-P1=42000000
-P2=84000000
-_etext=80650e4
-_sidata=80650e4
-_sdata=20000000
-_edata=20000164
-_sbss=20000164
-_ebss=200027fc
-_estack=20020000
-_ram_start=20000000
-_heap_start=200027fc
-_heap_end=2001c000
-_ram_end=20020000
-qstr:
-  n_pool=0
-  n_qstr=0
-  n_str_data_bytes=0
-  n_total_bytes=0
-GC:
-  102016 total
-  432 : 101584
-  1=14 2=5 m=3
-LFS free: 86528 bytes
-
-The AT24C08 EEPROM on I2C1
->>> i2c = machine.I2C(1)
->>> i2c.scan()
-[80, 81, 82, 83]
-
-Toggle blue led
->>> led = pyb.LED(1)
->>> led.on()
->>> led.off()
-
->>> import gc
->>> gc.mem_free()
-97456
->>> gc.mem_alloc()
-4640
-
->>> pyb.rng()
-780383225
-
->>> pyb.millis()
-1708543
-
->>> rtc = pyb.RTC()
->>> rtc.datetime((2017, 1, 13, 14, 45, 0, 0, 0))
->>> rtc.datetime()
-(2017, 1, 13, 6, 5, 0, 1, 204)
-
->>> adc = pyb.ADC(pyb.Pin.board.PA1) # does not work
->>> adc = pyb.ADC(pyb.Pin.board.P1_23)
->>> adc.read()
 ```
 
 ### Flashing via DFU
 
-This board can also be flashed using DFU. To put the board in DFU mode,
-disconnect USB, slide the BOOT0 DIP switch (number 2) to the ON position
-(towards USB) and reconnect USB.
+This board can be flashed using DFU. To put the board in DFU mode, disconnect
+USB, slide the BOOT0 DIP switch to the ON position (towards USB) and reconnect USB.
 
-Now you can flash the board using USB with the command
-`make BOARD=VCC_GND_F407VE deploy`. Once the board is flashed, slide BOOT0 back
-to the original position, disconnect and reconnect USB.
+Now you can flash the board using USB with the command:
 
-You can use the MicroPython command `pyb.bootloader()` to get into DFU mode
-without needing to use the switch.
+```bash
+make BOARD=VCC_GND_F407VE deploy
+```
+
+Once the upload is complete, disconnect USB, slide BOOT0 back
+to the original position and reconnect USB.
+
+Alternatively, you can use the MicroPython command `pyb.bootloader()`
+to get into DFU mode without needing to use the switch.
 
 Currently, you need to unplug and replug the board in order to switch from DFU
-mode to regular mode.
+mode back to regular mode.
 
-### Exposed Port Pins
+### Accessing the board
 
-* PA0-PA15
-* PB0-PB15
-* PC0-PC15
-* PD0-PD15
-* PE0-PE15
+Once built and deployed, you can access the MicroPython REPL (the Python prompt) via USB serial.
 
-### Specifications:
+```bash
+screen /dev/tty.usbmodem1422 115200
+# or
+screen /dev/ttyACM0 115200
+```
+
+### Specifications
 
 * STM32f407VET6 ARM Cortex M4
 * 168MHz, 210 DMIPS / 1.25 DMIPS / MHz
@@ -208,7 +58,7 @@ mode to regular mode.
 * AT24C08 I2C EEPROM 1024 Byte x 8, 400KHz
 * 2.54mm pitch pins
 * JTAG/SWD header
-* 512KByte Flash, 192 + 4 KByte SRAM
+* 512 KByte Flash, 192 + 4 KByte SRAM
 * 3x SPI, 3x USART, 2x UART, 2x I2S, 3x I2C
 * 1x FSMC, 1x SDIO, 2x CAN
 * 1x USB 2.0 FS / HS controller (with dedicated DMA)
@@ -227,21 +77,87 @@ mode to regular mode.
 * 2x18 side pins + 2x10 top pins + 1x4 debug pins
 * Dimensions: 49.53mm x 39.37mm
 
-### Modifications:
+### Modifications
+
+This board has a 25MHz system crystal oscillator.
 
 * change HSE_VALUE from 8000000 to 25000000
 * change PLL_M from 8 to 25
 
-### Links:
+### Exposed Port Pins
+
+* PA0-PA15
+* PB0-PB15
+* PC0-PC15
+* PD0-PD15
+* PE0-PE15
+
+### Peripherals
+
+#### AT24C08 8K EEPROM (U1)
+
+* 1 GND PRE
+* 2 GND NC
+* 3 GND E
+* 4 GND
+* 5 PB7 SDA
+* 6 PB6 SCL
+* 7 GND MODE
+* 8 3V3 VCC
+
+#### SWD debug (P4)
+
+* 1 GND
+* 2 PA14 SWCLK
+* 3 PA13 SWDIO
+* 4 3V3 VCC
+
+#### USB (U3)
+
+* 1 VCC 5V
+* 2 PA11 USB_DM
+* 3 PA12 USB_DP
+* 4 GND ID
+* 5 GND
+
+#### Micro SD
+
+* 1 PC10 SDIO_D2
+* 2 PC11 SDIO_D3
+* 3 PD2 SDIO_CMD
+* 4 3V3
+* 5 PC12 SDIO_SCK
+* 6 GND
+* 7 PC8 SDIO_D0
+* 8 PC9 SDIO_D1
+* 9 GND
+* 10 PA8 SW1
+
+#### User LED
+
+* PB9 LED0
+
+### Links
 
 * [STM32F407VE on st.com](https://www.st.com/en/microcontrollers-microprocessors/stm32f407ve.html)
-* [Buy on AliExpress](https://www.aliexpress.com/item/New-STM32F407VET6-Mini-version-of-the-core-board-STM32-minimum-system-board/32809309613.html) or search for "STM32F407VET6 Mini"
-* [Buy on Taobao](https://world.taobao.com/item/523361737493.htm)
+* Buy on [AliExpress] or search for "STM32F407VET6 Mini"
+* Buy on [Taobao](https://item.taobao.com/item.htm?id=523361737493)
 * [STM32F407 datasheet](docs/STM32F407_datasheet.pdf)
 * [STM32F407VET6 mini schematics](docs/STM32F407VET6_schematics.pdf)
 * [STM32F407VET6 mini PCB](docs/STM32F407VET6_mini.pdf)
 * [STM32F4 alternate function mapping](docs/STM32F4-AF-mapping.pdf)
-* [Larger STM32F407ZGT6 mini board](https://github.com/mcauser/VCC_GND_F407ZG)
+
+### Related boards
+
+* [MCUDev Black STM32F407VET6](https://github.com/mcauser/BLACK_F407VE)
+* [MCUDev Black STM32F407ZET6](https://github.com/mcauser/BLACK_F407ZE)
+* [MCUDev Black STM32F407ZGT6](https://github.com/mcauser/BLACK_F407ZG)
+* [MCUDev DevEBox STM32F407VET6](https://github.com/mcauser/MCUDEV_DEVEBOX_F407VET6)
+* [MCUDev DevEBox STM32F407VGT6](https://github.com/mcauser/MCUDEV_DEVEBOX_F407VGT6)
+* [VCC GND STM32F407VET6 Mini](https://github.com/mcauser/VCC_GND_F407VE) - this board
+* [VCC GND STM32F407ZGT6 Mini](https://github.com/mcauser/VCC_GND_F407ZG)
+
+[AliExpress]: https://www.aliexpress.com/item/32709285751.html
 
 ## License
 
